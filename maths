@@ -1,0 +1,95 @@
+@page "/Maths"
+
+<h3>Calculator</h3>
+<Row>
+<Column ColumnSize="ColumnSize.Is4.OnDesktop">
+<Card Margin="Margin.Is2.FromBottom">
+    <CardBody>
+        <CardTitle Size="1">
+         Calculator
+        </CardTitle>
+
+<Field>
+
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" @bind="amount" />
+
+</Field>
+
+<Field>
+    
+    <label for="rate">Rate:</label>
+    <input type="number" id="rate" @bind="rate" />
+
+</Field>
+
+<Field>
+    <label for="excess">Excess:</label>
+    <input type="number" id="excess" @bind="excess" />
+</Field>
+
+
+<button @onclick="CalculateTotal">Calculate</button>
+
+<div>
+    <strong>Total:</strong> @total
+</div>
+</CardBody>
+    </Card>
+    </Column>
+
+@code {
+    private decimal amount;
+    private decimal rate;
+    private decimal excess;
+    private decimal total;
+    List<string> Calculations { get; set; } = new List<string>();
+
+    private void CalculateTotal()
+    {
+        // Perform your calculation here
+        total = amount * rate + excess;
+
+    }
+
+}
+
+<Column ColumnSize="ColumnSize.Is4.OnDesktop">
+<Card Margin="Margin.Is2.FromBottom">
+    <CardBody>
+        <CardTitle Size="1">
+         Calculator
+        </CardTitle>
+
+<Field>
+
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" @bind="amount" />
+
+</Field>
+
+<Field>
+    
+    <label for="rate">Rate:</label>
+    <input type="number" id="rate" @bind="rate" />
+
+</Field>
+
+<Field>
+    <label for="excess">Excess:</label>
+    <input type="number" id="excess" @bind="excess" />
+</Field>
+
+
+<button @onclick="CalculateTotal">Calculate</button>
+
+<div>
+    <strong>Total:</strong> @total
+</div>
+</CardBody>
+    </Card>
+    </Column>
+</Row>
+
+
+
