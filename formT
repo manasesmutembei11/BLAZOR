@@ -1,0 +1,78 @@
+@page "/Home"
+
+<h1>Item Purchase Form</h1>
+
+<form @onsubmit="onSubmit">
+    <label for="itemName">Item Name:</label>
+    <input type="text" id="itemName" @bind-value="itemName" />
+
+    <label for="itemQuantity">Quantity:</label>
+    <input type="number" id="itemQuantity" @bind-value="itemQuantity" min="1" />
+
+    <label for="itemPrice">Price per Unit:</label>
+    <input type="number" id="itemPrice" @bind-value="itemPrice" step="0.01" min="0" />
+
+    <button type="submit">Purchase</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Price per Unit</th>
+            <th>Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in purchasedItems)
+        {
+            <tr>
+                <td>@item.ItemName</td>
+                <td>@item.Quantity</td>
+                <td>@item.ItemPrice</td>
+                <td>@item.TotalPrice</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private string itemName = "";
+    private int itemQuantity = 1;
+    private decimal itemPrice = 0.00m;
+    private List<PurchasedItem> purchasedItems = new List<PurchasedItem>();
+
+    private void onSubmit()
+    {
+        // Calculate the total price
+        decimal totalPrice = itemQuantity * itemPrice;
+
+        // Create a new PurchasedItem object
+        var purchasedItem = new PurchasedItem()
+        {
+            ItemName = itemName,
+            Quantity = itemQuantity,
+            ItemPrice = itemPrice,
+            TotalPrice = totalPrice
+        };
+
+        // Add the new PurchasedItem to the list
+        purchasedItems.Add(purchasedItem);
+
+        // Clear the form fields
+        itemName = "";
+        itemQuantity = 1;
+        itemPrice = 0.00m;
+    }
+
+    class PurchasedItem {
+    public string ItemName { get; set; }
+    public int Quantity { get; set; }
+    public decimal ItemPrice { get; set; }
+    public decimal TotalPrice { get; set; }
+}
+}
+
+
+
